@@ -3,7 +3,6 @@ const Product = require('./Product');
 const Category = require('./Category');
 const Tag = require('./Tag');
 const ProductTag = require('./ProductTag');
-const { TrustProductsChannelEndpointAssignmentContext } = require('twilio/lib/rest/trusthub/v1/trustProducts/trustProductsChannelEndpointAssignment');
 
 // Products belongsTo Category
 Product.belongsTo(Category, {
@@ -16,16 +15,14 @@ Category.hasMany(Product, {
 })
 
 // Products belongToMany Tags (through ProductTag)
-Products.belongsToMany(Tags, {
+Product.belongsToMany(Tag, {
   through: ProductTag,
-  as: "tagged_products",
   foreignKey: "product_id"
 });
 
 // Tags belongToMany Products (through ProductTag)
-Tag.belongsToMany(Products, {
+Tag.belongsToMany(Product, {
   through: ProductTag,
-  as: "tagged_products",
   foreignKey: "tag_id"
 });
 
