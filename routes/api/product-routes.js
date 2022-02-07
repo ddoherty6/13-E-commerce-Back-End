@@ -6,7 +6,6 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // get all products
 router.get('/', (req, res) => {
   // find all products
-  console.log("in get all products");
   Product.findAll({
     include: [
       {
@@ -118,10 +117,7 @@ router.put('/:id', (req, res) => {
       ]);
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
-    .catch((err) => {
-      // console.log(err);
-      res.status(400).json(err);
-    });
+    .catch((err) => res.status(400).json(err));
 });
 
 router.delete('/:id', (req, res) => {
